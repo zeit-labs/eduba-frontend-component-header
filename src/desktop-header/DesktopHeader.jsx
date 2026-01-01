@@ -44,7 +44,7 @@ const DesktopHeader = ({
       <MenuTrigger
         tag="button"
         aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username })}
-        className="btn btn-outline-primary d-inline-flex align-items-center pl-2 pr-3"
+        className="container-menu-dropdown"
       >
         <DesktopUserMenuToggleSlot avatar={avatar} label={username} />
       </MenuTrigger>
@@ -62,7 +62,7 @@ const DesktopHeader = ({
   return (
     <header className="site-header-desktop">
       <a className="nav-skip sr-only sr-only-focusable" href="#main">{intl.formatMessage(messages['header.label.skip.nav'])}</a>
-      <div className={`container-fluid ${logoClasses}`}>
+      <div className={`container-fluid container-header-desktop ${logoClasses}`}>
         <div className="nav-container position-relative d-flex align-items-center">
           <LogoSlot {...logoProps} />
           <nav
@@ -73,7 +73,7 @@ const DesktopHeader = ({
           </nav>
           <nav
             aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
-            className="nav secondary-menu-container align-items-center ml-auto"
+            className="nav secondary-menu-container"
           >
             {loggedIn
               ? (
