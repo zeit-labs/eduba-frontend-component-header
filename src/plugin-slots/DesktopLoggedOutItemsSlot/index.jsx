@@ -11,7 +11,9 @@ const DesktopLoggedOutItemsSlot = ({
       mergeProps: true,
     }}
   >
-    <DesktopLoggedOutItems items={items} />
+    <div className="container-desktop-logged-out-items">
+      <DesktopLoggedOutItems items={items} />
+    </div>
   </PluginSlot>
 );
 

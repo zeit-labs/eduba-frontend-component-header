@@ -49,7 +49,7 @@ class DesktopHeader extends React.Component {
         <MenuTrigger
           tag="button"
           aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username })}
-          className="btn btn-outline-primary d-inline-flex align-items-center pl-2 pr-3"
+          className="container-menu-dropdown"
         >
           <Avatar size="1.5em" src={avatar} alt="" className="mr-2" />
           {username} <CaretIcon role="img" aria-hidden focusable="false" />
@@ -80,7 +80,7 @@ class DesktopHeader extends React.Component {
     return (
       <header className="site-header-desktop">
         <a className="nav-skip sr-only sr-only-focusable" href="#main">{intl.formatMessage(messages['header.label.skip.nav'])}</a>
-        <div className={`container-fluid ${logoClasses}`}>
+        <div className={`container-fluid container-header-desktop ${logoClasses}`}>
           <div className="nav-container position-relative d-flex align-items-center">
             <LogoSlot {...logoProps} />
             <nav

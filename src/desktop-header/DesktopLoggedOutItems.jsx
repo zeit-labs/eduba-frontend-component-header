@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const DesktopLoggedOutItems = ({ items }) => items.map((item, i, arr) => (
   <a
     key={`${item.type}-${item.content}`}
-    className={i < arr.length - 1 ? 'btn mr-2 btn-link' : 'btn mr-2 btn-outline-primary'}
+    className={i < arr.length - 1 ? 'btn-link' : 'btn-outline-primary'}
     href={item.href}
   >
     {item.content}
