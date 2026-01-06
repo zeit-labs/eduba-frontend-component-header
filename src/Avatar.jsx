@@ -18,7 +18,7 @@ const Avatar = ({
   return (
     <span
       style={{ height: size, width: size }}
-      className={`avatar overflow-hidden d-inline-flex rounded-circle ${className}`}
+      className={`avatar overflow-hidden d-inline-flex rounded-circle container-avatar ${className}`}
     >
       {avatar}
     </span>
