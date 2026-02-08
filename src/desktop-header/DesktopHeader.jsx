@@ -78,7 +78,7 @@ class DesktopHeader extends React.Component {
     const logoClasses = getConfig().AUTHN_MINIMAL_HEADER ? 'mw-100' : null;
 
     return (
-      <header className="site-header-desktop">
+      <header className="site-header-desktop container">
         <a className="nav-skip sr-only sr-only-focusable" href="#main">{intl.formatMessage(messages['header.label.skip.nav'])}</a>
         <div className={`container-fluid container-header-desktop ${logoClasses}`}>
           <div className="nav-container position-relative d-flex align-items-center">
