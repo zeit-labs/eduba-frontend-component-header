@@ -18,9 +18,6 @@ import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
 // i18n
 import messages from '../Header.messages';
 
-// Assets
-import { CaretIcon } from '../Icons';
-
 class DesktopHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
     super(props);
@@ -51,8 +48,8 @@ class DesktopHeader extends React.Component {
           aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username })}
           className="container-menu-dropdown"
         >
-          <Avatar size="1.5em" src={avatar} alt="" className="mr-2" />
-          {username} <CaretIcon role="img" aria-hidden focusable="false" />
+          <Avatar size="40px" src={avatar} alt="" />
+          {username}
         </MenuTrigger>
         <MenuContent className="mb-0 dropdown-menu show dropdown-menu-right pin-right shadow py-2">
           <DesktopUserMenuSlot menu={userMenu} />
