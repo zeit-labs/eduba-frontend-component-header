@@ -18,9 +18,6 @@ import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
 // i18n
 import messages from '../Header.messages';
 
-// Assets
-import { CaretIcon } from '../Icons';
-
 class DesktopHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
     super(props);
@@ -51,8 +48,8 @@ class DesktopHeader extends React.Component {
           aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username })}
           className="container-menu-dropdown"
         >
-          <Avatar size="1.5em" src={avatar} alt="" className="mr-2" />
-          {username} <CaretIcon role="img" aria-hidden focusable="false" />
+          <Avatar size="40px" src={avatar} alt="" />
+          {username}
         </MenuTrigger>
         <MenuContent className="mb-0 dropdown-menu show dropdown-menu-right pin-right shadow py-2">
           <DesktopUserMenuSlot menu={userMenu} />
@@ -78,7 +75,7 @@ class DesktopHeader extends React.Component {
     const logoClasses = getConfig().AUTHN_MINIMAL_HEADER ? 'mw-100' : null;
 
     return (
-      <header className="site-header-desktop">
+      <header className="site-header-desktop container">
         <a className="nav-skip sr-only sr-only-focusable" href="#main">{intl.formatMessage(messages['header.label.skip.nav'])}</a>
         <div className={`container-fluid container-header-desktop ${logoClasses}`}>
           <div className="nav-container position-relative d-flex align-items-center">
