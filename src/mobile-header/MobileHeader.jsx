@@ -103,6 +103,7 @@ export const mobileHeaderDataShape = {
   logoDestination: PropTypes.string,
   avatar: PropTypes.string,
   username: PropTypes.string,
+  name: PropTypes.string,
   loggedIn: PropTypes.bool,
   stickyOnMobile: PropTypes.bool,
 };
@@ -117,6 +118,7 @@ MobileHeader.propTypes = {
   logoDestination: mobileHeaderDataShape.logoDestination,
   avatar: mobileHeaderDataShape.avatar,
   username: mobileHeaderDataShape.username,
+  name: mobileHeaderDataShape.name,
   loggedIn: mobileHeaderDataShape.loggedIn,
   stickyOnMobile: mobileHeaderDataShape.stickyOnMobile,
 
@@ -134,6 +136,7 @@ MobileHeader.defaultProps = {
   logoDestination: null,
   avatar: null,
   username: null,
+  name: null,
   loggedIn: false,
   stickyOnMobile: true,
 
