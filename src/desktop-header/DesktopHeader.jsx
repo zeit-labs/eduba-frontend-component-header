@@ -39,6 +39,7 @@ class DesktopHeader extends React.Component {
       avatar,
       username,
       name,
+      email,
       intl,
     } = this.props;
 
@@ -53,7 +54,10 @@ class DesktopHeader extends React.Component {
           className="container-menu-dropdown"
         >
           <Avatar size="40px" src={avatar} alt="" />
-          {name ?? username}
+          <div className="custom-info">
+            <p>{name ?? username}</p>
+            <p>{email ?? ''}</p>
+          </div>
         </MenuTrigger>
         <MenuContent className="mb-0 dropdown-menu show dropdown-menu-right pin-right shadow py-2">
           <DesktopUserMenuSlot menu={userMenu} />
@@ -134,6 +138,7 @@ DesktopHeader.propTypes = {
   avatar: desktopHeaderDataShape.avatarmainMenu,
   username: desktopHeaderDataShape.usernamemainMenu,
   name: PropTypes.string,
+  email: PropTypes.string,
   loggedIn: desktopHeaderDataShape.loggedInmainMenu,
 
   // i18n
