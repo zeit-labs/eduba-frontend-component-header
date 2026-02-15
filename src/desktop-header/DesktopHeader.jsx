@@ -18,14 +18,31 @@ import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
 // i18n
 import messages from '../Header.messages';
 
+export const customMenuLinks = [
+  {
+    type: 'item',
+    href: 'https://www.eduba.mohesr.gov.iq/ar',
+    content: 'الرئيسية',
+  },
+  {
+    type: 'item',
+    href: 'https://www.eduba.mohesr.gov.iq/ar/all-courses',
+    content: 'البرامج',
+  },
+  {
+    type: 'item',
+    href: 'https://www.eduba.mohesr.gov.iq/ar/contact-us',
+    content: 'اتصل بنا',
+  },
+];
+
 class DesktopHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
     super(props);
   }
 
   renderMainMenu() {
-    const { mainMenu } = this.props;
-    return <DesktopMainMenuSlot menu={mainMenu} />;
+    return <DesktopMainMenuSlot menu={customMenuLinks} />;
   }
 
   renderSecondaryMenu() {

@@ -8,7 +8,7 @@ const Logo = ({
 }) => {
   const { href, ...restAttributes } = attributes;
   return (
-    <a href="https://www.eduba.mohesr.gov.iq/ar" className="logo _---_" {...restAttributes}>
+    <a href="https://www.eduba.mohesr.gov.iq/ar" className="logo" {...restAttributes}>
       <img className="d-block" src={src} alt={alt} />
     </a>
   );
