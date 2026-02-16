@@ -34,7 +34,7 @@ const DesktopHeaderUserMenu = () => {
       items: [
         {
           type: 'item',
-          href: 'http://local.openedx.io:8000/logout',
+          href: 'https://eduba.mohesr.gov.iq/logout',
           content: 'Sign Out',
           icon: logOutSvg,
         },
