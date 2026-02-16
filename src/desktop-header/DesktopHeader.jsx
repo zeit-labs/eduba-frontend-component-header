@@ -18,14 +18,31 @@ import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
 // i18n
 import messages from '../Header.messages';
 
+export const customMenuLinks = [
+  {
+    type: 'item',
+    href: 'https://www.eduba.mohesr.gov.iq/ar',
+    content: 'الرئيسية',
+  },
+  {
+    type: 'item',
+    href: 'https://www.eduba.mohesr.gov.iq/all-courses',
+    content: 'البرامج',
+  },
+  {
+    type: 'item',
+    href: 'https://www.eduba.mohesr.gov.iq/contact-us',
+    content: 'اتصل بنا',
+  },
+];
+
 class DesktopHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
     super(props);
   }
 
   renderMainMenu() {
-    const { mainMenu } = this.props;
-    return <DesktopMainMenuSlot menu={mainMenu} />;
+    return <DesktopMainMenuSlot menu={customMenuLinks} />;
   }
 
   renderSecondaryMenu() {
@@ -38,6 +55,8 @@ class DesktopHeader extends React.Component {
       userMenu,
       avatar,
       username,
+      name,
+      email,
       intl,
     } = this.props;
 
@@ -45,11 +64,17 @@ class DesktopHeader extends React.Component {
       <Menu transitionClassName="menu-dropdown" transitionTimeout={250}>
         <MenuTrigger
           tag="button"
-          aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username })}
+          aria-label={intl.formatMessage(
+            messages['header.label.account.menu.for'],
+            { username: name ?? username },
+          )}
           className="container-menu-dropdown"
         >
           <Avatar size="40px" src={avatar} alt="" />
-          {username}
+          <div className="custom-info">
+            <p>{name ?? username}</p>
+            <p>{email ?? ''}</p>
+          </div>
         </MenuTrigger>
         <MenuContent className="mb-0 dropdown-menu show dropdown-menu-right pin-right shadow py-2">
           <DesktopUserMenuSlot menu={userMenu} />
@@ -75,9 +100,9 @@ class DesktopHeader extends React.Component {
     const logoClasses = getConfig().AUTHN_MINIMAL_HEADER ? 'mw-100' : null;
 
     return (
-      <header className="site-header-desktop container">
+      <header className="site-header-desktop custom-container">
         <a className="nav-skip sr-only sr-only-focusable" href="#main">{intl.formatMessage(messages['header.label.skip.nav'])}</a>
-        <div className={`container-fluid container-header-desktop ${logoClasses}`}>
+        <div className={`container-header-desktop ${logoClasses}`}>
           <div className="nav-container position-relative d-flex align-items-center">
             <LogoSlot {...logoProps} />
             <nav
@@ -115,6 +140,7 @@ export const desktopHeaderDataShape = {
   logoDestination: PropTypes.string,
   avatar: PropTypes.string,
   username: PropTypes.string,
+  name: PropTypes.string,
   loggedIn: PropTypes.bool,
 };
 
@@ -128,6 +154,8 @@ DesktopHeader.propTypes = {
   logoDestination: desktopHeaderDataShape.logoDestinationmainMenu,
   avatar: desktopHeaderDataShape.avatarmainMenu,
   username: desktopHeaderDataShape.usernamemainMenu,
+  name: PropTypes.string,
+  email: PropTypes.string,
   loggedIn: desktopHeaderDataShape.loggedInmainMenu,
 
   // i18n
@@ -144,6 +172,7 @@ DesktopHeader.defaultProps = {
   logoDestination: null,
   avatar: null,
   username: null,
+  name: null,
   loggedIn: false,
 };
 

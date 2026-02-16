@@ -2,15 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Logo = ({
-  href,
   src,
   alt,
   ...attributes
-}) => (
-  <a href={href} className="logo" {...attributes}>
-    <img className="d-block" src={src} alt={alt} />
-  </a>
-);
+}) => {
+  const { href, ...restAttributes } = attributes;
+  return (
+    <a href="https://www.eduba.mohesr.gov.iq/ar" className="logo" {...restAttributes}>
+      <img className="d-block" src={src} alt={alt} />
+    </a>
+  );
+};
 
 export const logoDataShape = {
   href: PropTypes.string.isRequired,

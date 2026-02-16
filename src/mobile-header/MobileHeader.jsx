@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
-import { getConfig } from '@edx/frontend-platform';
 
 // Local Components
 import { Menu, MenuTrigger, MenuContent } from '../Menu';
@@ -17,7 +16,10 @@ import { mobileHeaderUserMenuDataShape } from './MobileHeaderUserMenu';
 import messages from '../Header.messages';
 
 // Assets
+import Avatar from '../Avatar';
 import { MenuIcon } from '../Icons';
+import { coursesSvg, logOutSvg } from '../desktop-header/DesktopHeaderUserMenu';
+import { customMenuLinks } from '../desktop-header/DesktopHeader';
 
 class MobileHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
@@ -25,13 +27,35 @@ class MobileHeader extends React.Component {
   }
 
   renderMainMenu() {
-    const { mainMenu, secondaryMenu } = this.props;
-    return <MobileMainMenuSlot menu={[...mainMenu, ...secondaryMenu]} />;
+    return <MobileMainMenuSlot menu={customMenuLinks} />;
   }
 
   renderUserMenuItems() {
-    const { userMenu } = this.props;
-    return <MobileUserMenuSlot menu={userMenu} />;
+    const customUserMenu = [
+      {
+        heading: '',
+        items: [
+          {
+            type: 'item',
+            href: 'https://apps.eduba.mohesr.gov.iq/learner-dashboard/',
+            content: 'مقرراتي',
+            icon: coursesSvg,
+          },
+        ],
+      },
+      {
+        heading: '',
+        items: [
+          {
+            type: 'item',
+            href: 'https://eduba.mohesr.gov.iq/logout',
+            content: 'Sign Out',
+            icon: logOutSvg,
+          },
+        ],
+      },
+    ];
+    return <MobileUserMenuSlot menu={customUserMenu} />;
   }
 
   renderLoggedOutItems() {
@@ -49,45 +73,74 @@ class MobileHeader extends React.Component {
       mainMenu,
       userMenu,
       loggedOutItems,
+      avatar,
+      username,
+      name,
+      email,
     } = this.props;
     const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
-    const logoClasses = getConfig().AUTHN_MINIMAL_HEADER ? 'justify-content-left pl-3' : 'justify-content-center';
 
     return (
       <header
         aria-label={intl.formatMessage(messages['header.label.main.header'])}
         className="site-header-mobile"
       >
+        <div className="w-100 d-flex justify-content-start">
+          <LogoSlot {...logoProps} itemType="http://schema.org/Organization" />
+        </div>
+        <a className="nav-skip sr-only sr-only-focusable" href="#main">
+          {intl.formatMessage(messages['header.label.skip.nav'])}
+        </a>
         {mainMenu.length > 0 ? (
-          <div className="w-100 d-flex justify-content-start">
+          <div className="w-100 d-flex justify-content-end">
             <Menu className="position-static">
               <MenuTrigger
                 tag="button"
                 className="icon-button"
-                aria-label={intl.formatMessage(messages['header.label.main.menu'])}
+                aria-label={intl.formatMessage(
+                  messages['header.label.main.menu'],
+                )}
                 title={intl.formatMessage(messages['header.label.main.menu'])}
               >
-                <MenuIcon role="img" aria-hidden focusable="false" style={{ width: '1.5rem', height: '1.5rem' }} />
+                <MenuIcon
+                  role="img"
+                  aria-hidden
+                  focusable="false"
+                  style={{ width: '1.5rem', height: '1.5rem' }}
+                />
               </MenuTrigger>
               <MenuContent
                 tag="nav"
-                aria-label={intl.formatMessage(messages['header.label.main.nav'])}
+                aria-label={intl.formatMessage(
+                  messages['header.label.main.nav'],
+                )}
                 className="nav flex-column pin-left pin-right border-top shadow py-2"
               >
                 {this.renderMainMenu()}
                 {userMenu.length > 0 || loggedOutItems.length > 0 ? (
                   <div className="custom-group">
-                    {loggedIn ? this.renderUserMenuItems() : this.renderLoggedOutItems()}
+                    {loggedIn ? (
+                      <>
+                        <div className="info-container">
+                          <Avatar size="40px" src={avatar} alt="" />
+                          <div className="custom-info">
+                            <p>{name ?? username}</p>
+                            <p>{email ?? ''}</p>
+                          </div>
+                        </div>
+                        {this.renderUserMenuItems()}
+                      </>
+                    ) : (
+                      <>
+                        {this.renderLoggedOutItems()}
+                      </>
+                    )}
                   </div>
                 ) : null}
               </MenuContent>
             </Menu>
           </div>
         ) : null}
-        <a className="nav-skip sr-only sr-only-focusable" href="#main">{intl.formatMessage(messages['header.label.skip.nav'])}</a>
-        <div className={`w-100 d-flex ${logoClasses}`}>
-          <LogoSlot {...logoProps} itemType="http://schema.org/Organization" />
-        </div>
       </header>
     );
   }
@@ -103,6 +156,8 @@ export const mobileHeaderDataShape = {
   logoDestination: PropTypes.string,
   avatar: PropTypes.string,
   username: PropTypes.string,
+  name: PropTypes.string,
+  email: PropTypes.string,
   loggedIn: PropTypes.bool,
   stickyOnMobile: PropTypes.bool,
 };
@@ -117,6 +172,8 @@ MobileHeader.propTypes = {
   logoDestination: mobileHeaderDataShape.logoDestination,
   avatar: mobileHeaderDataShape.avatar,
   username: mobileHeaderDataShape.username,
+  name: mobileHeaderDataShape.name,
+  email: mobileHeaderDataShape.email,
   loggedIn: mobileHeaderDataShape.loggedIn,
   stickyOnMobile: mobileHeaderDataShape.stickyOnMobile,
 
@@ -134,9 +191,10 @@ MobileHeader.defaultProps = {
   logoDestination: null,
   avatar: null,
   username: null,
+  name: null,
+  email: null,
   loggedIn: false,
   stickyOnMobile: true,
-
 };
 
 export default injectIntl(MobileHeader);
