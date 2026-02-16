@@ -9,12 +9,12 @@ export const customMenuLinks = [
   },
   {
     type: 'item',
-    href: 'https://www.eduba.mohesr.gov.iq/ar/all-courses',
+    href: 'https://www.eduba.mohesr.gov.iq/all-courses',
     content: 'البرامج',
   },
   {
     type: 'item',
-    href: 'https://www.eduba.mohesr.gov.iq/ar/contact-us',
+    href: 'https://www.eduba.mohesr.gov.iq/contact-us',
     content: 'اتصل بنا',
   },
 ];
