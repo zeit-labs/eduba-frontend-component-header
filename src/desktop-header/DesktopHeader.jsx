@@ -73,7 +73,7 @@ class DesktopHeader extends React.Component {
           <Avatar size="40px" src={avatar} alt="" />
           <div className="custom-info">
             <p>{name ?? username}</p>
-            <p>{email ?? ''}</p>
+            <p style={{ textTransform: 'lowercase' }}>{email ?? ''}</p>
           </div>
         </MenuTrigger>
         <MenuContent className="mb-0 dropdown-menu show dropdown-menu-right pin-right shadow py-2">

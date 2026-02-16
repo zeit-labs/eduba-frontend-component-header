@@ -125,7 +125,7 @@ class MobileHeader extends React.Component {
                           <Avatar size="40px" src={avatar} alt="" />
                           <div className="custom-info">
                             <p>{name ?? username}</p>
-                            <p>{email ?? ''}</p>
+                            <p style={{ textTransform: 'lowercase' }}>{email ?? ''}</p>
                           </div>
                         </div>
                         {this.renderUserMenuItems()}
