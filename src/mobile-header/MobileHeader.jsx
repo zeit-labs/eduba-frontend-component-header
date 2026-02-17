@@ -49,7 +49,7 @@ class MobileHeader extends React.Component {
           {
             type: 'item',
             href: 'https://eduba.mohesr.gov.iq/logout',
-            content: 'Sign Out',
+            content: 'تسجيل الخروج',
             icon: logOutSvg,
           },
         ],
