@@ -1,5 +1,5 @@
 import Header from './Header';
-import LearningHeader from './learning-header/LearningHeader';
+const LearningHeader = Header;
 import messages from './i18n/index';
 import StudioHeader from './studio-header';
 
