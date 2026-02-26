@@ -18,7 +18,7 @@ import messages from '../Header.messages';
 // Assets
 import Avatar from '../Avatar';
 import { MenuIcon } from '../Icons';
-import { coursesSvg, logOutSvg } from '../desktop-header/DesktopHeaderUserMenu';
+import { coursesSvg, logOutSvg, paymentSvg } from '../desktop-header/DesktopHeaderUserMenu';
 import { customMenuLinks } from '../desktop-header/DesktopHeader';
 
 class MobileHeader extends React.Component {
@@ -40,6 +40,17 @@ class MobileHeader extends React.Component {
             href: 'https://apps.eduba.mohesr.gov.iq/learner-dashboard/',
             content: 'مقرراتي',
             icon: coursesSvg,
+          },
+        ],
+      },
+      {
+        heading: '',
+        items: [
+          {
+            type: 'item',
+            href: 'https://eduba.mohesr.gov.iq/invoices',
+            content: 'طلباتي',
+            icon: paymentSvg,
           },
         ],
       },
