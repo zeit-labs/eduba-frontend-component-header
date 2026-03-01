@@ -48,7 +48,7 @@ const DesktopHeaderUserMenu = () => {
       items: [
         {
           type: 'item',
-          href: 'https://eduba.mohesr.gov.iq/invoices',
+          href: 'https://eduba.mohesr.gov.iq/api/eduba/payments/v1/me',
           content: 'طلباتي',
           icon: paymentSvg,
         },
