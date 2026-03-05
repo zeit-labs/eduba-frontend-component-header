@@ -15,6 +15,20 @@ export const coursesSvg = (
     <path d="M9 8h6" />
   </svg>
 );
+export const paymentSvg = (
+  <svg
+    stroke="currentColor"
+    fill="currentColor"
+    strokeWidth="0"
+    viewBox="0 0 24 24"
+    height="200px"
+    width="200px"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path fill="none" d="M0 0h24v24H0z" />
+    <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
+  </svg>
+);
 
 const DesktopHeaderUserMenu = () => {
   const newMenu = [
@@ -34,6 +48,17 @@ const DesktopHeaderUserMenu = () => {
       items: [
         {
           type: 'item',
+          href: 'https://eduba.mohesr.gov.iq/api/eduba/payments/v1/me',
+          content: 'طلباتي',
+          icon: paymentSvg,
+        },
+      ],
+    },
+    {
+      heading: '',
+      items: [
+        {
+          type: 'item',
           href: 'https://eduba.mohesr.gov.iq/logout',
           content: 'تسجيل الخروج',
           icon: logOutSvg,
@@ -41,16 +66,23 @@ const DesktopHeaderUserMenu = () => {
       ],
     },
   ];
-  const lastGroupIndex = newMenu.length - 1;
-  const lastGroup = newMenu[lastGroupIndex];
-  const lastItemIndex = lastGroup?.items?.length ? lastGroup.items.length - 1 : -1;
   return newMenu.map((group, groupIndex) => (
     // eslint-disable-next-line react/jsx-no-comment-textnodes,react/no-array-index-key
     <React.Fragment key={groupIndex}>
-      {group.heading && <div className="dropdown-header" role="heading" aria-level="1">{group.heading}</div>}
+      {groupIndex === newMenu.length - 1 && (
+        <div className="dropdown-divider" role="separator" />
+      )}
+      {group.heading && (
+        <div className="dropdown-header" role="heading" aria-level="1">
+          {group.heading}
+        </div>
+      )}
       {group.items.map(({
         type, content, href, disabled, isActive, onClick, icon,
       }, itemIndex) => {
+        const lastGroupIndex = newMenu.length - 1;
+        const lastGroup = newMenu[lastGroupIndex];
+        const lastItemIndex = lastGroup?.items?.length ? lastGroup.items.length - 1 : -1;
         const isLastItem = groupIndex === lastGroupIndex && itemIndex === lastItemIndex;
         return (
           <a
@@ -63,7 +95,6 @@ const DesktopHeaderUserMenu = () => {
           </a>
         );
       })}
-      {groupIndex < lastGroupIndex && <div className="dropdown-divider" role="separator" />}
     </React.Fragment>
   ));
 };
