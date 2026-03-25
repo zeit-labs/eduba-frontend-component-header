@@ -7,6 +7,21 @@ const LANGUAGES = { AR: 'ar', EN: 'en' };
 const DEFAULT_LANG = LANGUAGES.AR;
 const COOKIE_EXPIRES_DAYS = 365;
 
+const RTL_LANGUAGES = new Set(['ar']);
+
+// ─── Document direction ───────────────────────────────────────────────────────
+
+/**
+ * Applies the correct `dir` and `lang` attributes to <html> for the given locale.
+ * Called eagerly on initial load (before first render) to prevent a flash of
+ * wrong directionality, and again before every page reload for consistency.
+ */
+function applyDocumentDirection(lang) {
+  const root = document.documentElement;
+  root.dir = RTL_LANGUAGES.has(lang) ? 'rtl' : 'ltr';
+  root.lang = lang;
+}
+
 // ─── Cookie helpers ───────────────────────────────────────────────────────────
 
 /**
@@ -67,15 +82,18 @@ function resolveInitialLanguage() {
   // Cookie doesn't exist → create it with the default language
   if (!saved) {
     writeCookie(COOKIE_NAME, DEFAULT_LANG);
+    applyDocumentDirection(DEFAULT_LANG);
     return DEFAULT_LANG;
   }
 
   // Cookie exists but has an unexpected value → reset it
   if (!Object.values(LANGUAGES).includes(saved)) {
     writeCookie(COOKIE_NAME, DEFAULT_LANG);
+    applyDocumentDirection(DEFAULT_LANG);
     return DEFAULT_LANG;
   }
 
+  applyDocumentDirection(saved);
   return saved;
 }
 
@@ -97,6 +115,7 @@ function useLanguageSwitcher() {
       return;
     }
     writeCookie(COOKIE_NAME, lang);
+    applyDocumentDirection(lang);
     setLanguage(lang);
     window.location.reload();
   }, [language]);
