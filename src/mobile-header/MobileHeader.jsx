@@ -19,7 +19,8 @@ import messages from '../Header.messages';
 import Avatar from '../Avatar';
 import { MenuIcon } from '../Icons';
 import { coursesSvg, logOutSvg, paymentSvg } from '../desktop-header/DesktopHeaderUserMenu';
-import { customMenuLinks } from '../desktop-header/DesktopHeader';
+import { getCustomMenuLinks } from '../config/menuLinks';
+import LanguageSwitcherButton from '../components/LanguageSwitcherButton';
 
 class MobileHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
@@ -27,10 +28,11 @@ class MobileHeader extends React.Component {
   }
 
   renderMainMenu() {
-    return <MobileMainMenuSlot menu={customMenuLinks} />;
+    return <MobileMainMenuSlot menu={getCustomMenuLinks(this.props.intl)} />;
   }
 
   renderUserMenuItems() {
+    const { intl } = this.props;
     const customUserMenu = [
       {
         heading: '',
@@ -38,7 +40,7 @@ class MobileHeader extends React.Component {
           {
             type: 'item',
             href: 'https://apps.eduba.mohesr.gov.iq/learner-dashboard/',
-            content: 'مقرراتي',
+            content: intl.formatMessage(messages['my-courses']),
             icon: coursesSvg,
           },
         ],
@@ -49,7 +51,7 @@ class MobileHeader extends React.Component {
           {
             type: 'item',
             href: 'https://eduba.mohesr.gov.iq/api/eduba/payments/v1/me',
-            content: 'طلباتي',
+            content: intl.formatMessage(messages['my-requests']),
             icon: paymentSvg,
           },
         ],
@@ -60,7 +62,7 @@ class MobileHeader extends React.Component {
           {
             type: 'item',
             href: 'https://eduba.mohesr.gov.iq/logout',
-            content: 'تسجيل الخروج',
+            content: intl.formatMessage(messages.logout),
             icon: logOutSvg,
           },
         ],
@@ -93,25 +95,26 @@ class MobileHeader extends React.Component {
 
     return (
       <header
-        aria-label={intl.formatMessage(messages['header.label.main.header'])}
+        aria-label={intl.formatMessage(messages['main-header'])}
         className="site-header-mobile"
       >
         <div className="w-100 d-flex justify-content-start">
           <LogoSlot {...logoProps} itemType="http://schema.org/Organization" />
         </div>
         <a className="nav-skip sr-only sr-only-focusable" href="#main">
-          {intl.formatMessage(messages['header.label.skip.nav'])}
+          {intl.formatMessage(messages['skip-nav'])}
         </a>
         {mainMenu.length > 0 ? (
-          <div className="w-100 d-flex justify-content-end">
+          <div className="w-100 d-flex justify-content-end align-items-center">
+            <LanguageSwitcherButton />
             <Menu className="position-static">
               <MenuTrigger
                 tag="button"
                 className="icon-button"
                 aria-label={intl.formatMessage(
-                  messages['header.label.main.menu'],
+                  messages['main-menu'],
                 )}
-                title={intl.formatMessage(messages['header.label.main.menu'])}
+                title={intl.formatMessage(messages['main-menu'])}
               >
                 <MenuIcon
                   role="img"
@@ -123,7 +126,7 @@ class MobileHeader extends React.Component {
               <MenuContent
                 tag="nav"
                 aria-label={intl.formatMessage(
-                  messages['header.label.main.nav'],
+                  messages['main-nav'],
                 )}
                 className="nav flex-column pin-left pin-right border-top shadow py-2"
               >

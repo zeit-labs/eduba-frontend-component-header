@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useIntl } from '@edx/frontend-platform/i18n';
+import messages from '../Header.messages';
 
 export const logOutSvg = (
   <svg stroke="#a4a7ae" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -31,6 +33,7 @@ export const paymentSvg = (
 );
 
 const DesktopHeaderUserMenu = () => {
+  const intl = useIntl();
   const newMenu = [
     {
       heading: '',
@@ -38,7 +41,7 @@ const DesktopHeaderUserMenu = () => {
         {
           type: 'item',
           href: 'https://apps.eduba.mohesr.gov.iq/learner-dashboard/',
-          content: 'مقرراتي',
+          content: intl.formatMessage(messages['my-courses']),
           icon: coursesSvg,
         },
       ],
@@ -49,7 +52,7 @@ const DesktopHeaderUserMenu = () => {
         {
           type: 'item',
           href: 'https://eduba.mohesr.gov.iq/api/eduba/payments/v1/me',
-          content: 'طلباتي',
+          content: intl.formatMessage(messages['my-requests']),
           icon: paymentSvg,
         },
       ],
@@ -60,7 +63,7 @@ const DesktopHeaderUserMenu = () => {
         {
           type: 'item',
           href: 'https://eduba.mohesr.gov.iq/logout',
-          content: 'تسجيل الخروج',
+          content: intl.formatMessage(messages.logout),
           icon: logOutSvg,
         },
       ],

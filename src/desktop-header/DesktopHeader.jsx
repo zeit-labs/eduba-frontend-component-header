@@ -17,24 +17,8 @@ import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
 
 // i18n
 import messages from '../Header.messages';
-
-export const customMenuLinks = [
-  {
-    type: 'item',
-    href: 'https://www.eduba.mohesr.gov.iq/ar',
-    content: 'الرئيسية',
-  },
-  {
-    type: 'item',
-    href: 'https://www.eduba.mohesr.gov.iq/all-courses',
-    content: 'البرامج',
-  },
-  {
-    type: 'item',
-    href: 'https://www.eduba.mohesr.gov.iq/contact-us',
-    content: 'اتصل بنا',
-  },
-];
+import { getCustomMenuLinks } from '../config/menuLinks';
+import LanguageSwitcherButton from '../components/LanguageSwitcherButton';
 
 class DesktopHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
@@ -42,7 +26,7 @@ class DesktopHeader extends React.Component {
   }
 
   renderMainMenu() {
-    return <DesktopMainMenuSlot menu={customMenuLinks} />;
+    return <DesktopMainMenuSlot menu={getCustomMenuLinks(this.props.intl)} />;
   }
 
   renderSecondaryMenu() {
@@ -65,7 +49,7 @@ class DesktopHeader extends React.Component {
         <MenuTrigger
           tag="button"
           aria-label={intl.formatMessage(
-            messages['header.label.account.menu.for'],
+            messages['account-menu-for'],
             { username: name ?? username },
           )}
           className="container-menu-dropdown"
@@ -101,18 +85,18 @@ class DesktopHeader extends React.Component {
 
     return (
       <header className="site-header-desktop custom-container">
-        <a className="nav-skip sr-only sr-only-focusable" href="#main">{intl.formatMessage(messages['header.label.skip.nav'])}</a>
+        <a className="nav-skip sr-only sr-only-focusable" href="#main">{intl.formatMessage(messages['skip-nav'])}</a>
         <div className={`container-header-desktop ${logoClasses}`}>
           <div className="nav-container position-relative d-flex align-items-center">
             <LogoSlot {...logoProps} />
             <nav
-              aria-label={intl.formatMessage(messages['header.label.main.nav'])}
+              aria-label={intl.formatMessage(messages['main-nav'])}
               className="nav main-nav"
             >
               {this.renderMainMenu()}
             </nav>
             <nav
-              aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
+              aria-label={intl.formatMessage(messages['secondary-nav'])}
               className="nav secondary-menu-container align-items-center ml-auto"
             >
               {loggedIn
@@ -123,6 +107,7 @@ class DesktopHeader extends React.Component {
                   </>
                 ) : this.renderLoggedOutItems()}
             </nav>
+            <LanguageSwitcherButton />
           </div>
         </div>
       </header>
