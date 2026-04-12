@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Responsive from 'react-responsive';
-import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import { IntlProvider, useIntl } from '@edx/frontend-platform/i18n';
 import { AppContext } from '@edx/frontend-platform/react';
 import {
   APP_CONFIG_INITIALIZED,
@@ -9,12 +9,13 @@ import {
   getConfig,
   subscribe,
 } from '@edx/frontend-platform';
-
 import PropTypes from 'prop-types';
+
 import DesktopHeaderSlot from './plugin-slots/DesktopHeaderSlot';
 import MobileHeaderSlot from './plugin-slots/MobileHeaderSlot';
-
-import messages from './Header.messages';
+import headerMessages from './Header.messages';
+import i18nMessages from './i18n';
+import { getLanguageFromCookie } from './hooks/useLanguageSwitcher';
 
 ensureConfig([
   'LMS_BASE_URL',
@@ -31,61 +32,48 @@ subscribe(APP_CONFIG_INITIALIZED, () => {
   }, 'Header additional config');
 });
 
-/**
- * Header component for the application.
- * Displays a header with the provided main menu, secondary menu, and user menu when the user is authenticated.
- * If any of the props (mainMenuItems, secondaryMenuItems, userMenuItems) are not provided, default
- * items are displayed.
- * For more details on how to use this component, please refer to this document:
- * https://github.com/openedx/frontend-component-header/blob/master/docs/using_custom_header.rst
- *
- * @param {list} mainMenuItems - The list of main menu items to display.
- * See the documentation for the structure of main menu item.
- * @param {list} secondaryMenuItems - The list of secondary menu items to display.
- * See the documentation for the structure of secondary menu item.
- * @param {list} userMenuItems - The list of user menu items to display.
- * See the documentation for the structure of user menu item.
- */
-const Header = ({
-  intl, mainMenuItems, secondaryMenuItems, userMenuItems,
-}) => {
+// ─── Inner component ─────────────────────────────────────────────────────────
+// Rendered inside our IntlProvider so useIntl() reads our locale messages.
+
+const HeaderContent = ({ mainMenuItems, secondaryMenuItems, userMenuItems }) => {
+  const intl = useIntl();
   const { authenticatedUser, config } = useContext(AppContext);
 
   const defaultMainMenu = [
     {
       type: 'item',
       href: `${config.LMS_BASE_URL}/dashboard`,
-      content: intl.formatMessage(messages['header.links.courses']),
+      content: intl.formatMessage(headerMessages.courses),
     },
   ];
+
   const defaultUserMenu = authenticatedUser === null ? [] : [{
     heading: '',
     items: [
       {
         type: 'item',
         href: `${config.LMS_BASE_URL}/dashboard`,
-        content: intl.formatMessage(messages['header.user.menu.dashboard']),
+        content: intl.formatMessage(headerMessages.dashboard),
       },
       {
         type: 'item',
         href: `${config.ACCOUNT_PROFILE_URL}/u/${authenticatedUser.username}`,
-        content: intl.formatMessage(messages['header.user.menu.profile']),
+        content: intl.formatMessage(headerMessages.profile),
       },
       {
         type: 'item',
         href: config.ACCOUNT_SETTINGS_URL,
-        content: intl.formatMessage(messages['header.user.menu.account.settings']),
+        content: intl.formatMessage(headerMessages['account-settings']),
       },
-      // Users should only see Order History if have a ORDER_HISTORY_URL define in the environment.
       ...(config.ORDER_HISTORY_URL ? [{
         type: 'item',
         href: config.ORDER_HISTORY_URL,
-        content: intl.formatMessage(messages['header.user.menu.order.history']),
+        content: intl.formatMessage(headerMessages['order-history']),
       }] : []),
       {
         type: 'item',
         href: config.LOGOUT_URL,
-        content: intl.formatMessage(messages['header.user.menu.logout']),
+        content: intl.formatMessage(headerMessages.logout),
       },
     ],
   }];
@@ -98,12 +86,12 @@ const Header = ({
     {
       type: 'item',
       href: config.LOGIN_URL,
-      content: intl.formatMessage(messages['header.user.menu.login']),
+      content: intl.formatMessage(headerMessages.login),
     },
     {
       type: 'item',
       href: `${config.LMS_BASE_URL}/register`,
-      content: intl.formatMessage(messages['header.user.menu.register']),
+      content: intl.formatMessage(headerMessages['sign-up']),
     },
   ];
 
@@ -134,22 +122,15 @@ const Header = ({
   );
 };
 
-Header.defaultProps = {
+HeaderContent.defaultProps = {
   mainMenuItems: null,
   secondaryMenuItems: null,
   userMenuItems: null,
 };
 
-Header.propTypes = {
-  intl: intlShape.isRequired,
-  mainMenuItems: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.array,
-  ]),
-  secondaryMenuItems: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.array,
-  ]),
+HeaderContent.propTypes = {
+  mainMenuItems: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
+  secondaryMenuItems: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   userMenuItems: PropTypes.arrayOf(PropTypes.shape({
     heading: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.shape({
@@ -161,4 +142,22 @@ Header.propTypes = {
   })),
 };
 
-export default injectIntl(Header);
+// ─── Outer wrapper ────────────────────────────────────────────────────────────
+// Reads the language cookie once on mount and feeds the correct messages
+// into IntlProvider so every child component sees the right locale.
+
+const Header = (props) => {
+  const locale = getLanguageFromCookie();
+  const localeMessages = i18nMessages[locale] ?? i18nMessages.ar;
+
+  return (
+    <IntlProvider locale={locale} messages={localeMessages}>
+      <HeaderContent {...props} />
+    </IntlProvider>
+  );
+};
+
+Header.defaultProps = HeaderContent.defaultProps;
+Header.propTypes = HeaderContent.propTypes;
+
+export default Header;
