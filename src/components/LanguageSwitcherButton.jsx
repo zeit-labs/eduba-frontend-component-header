@@ -9,6 +9,12 @@ const LanguageSwitcherButton = () => {
       type="button"
       className="language-switcher-btn"
       onClick={toggleLanguage}
+      style={{
+        borderColor: '#6b7280',
+        borderRadius: '8px',
+        borderStyle: 'solid',
+        borderWidth: '1px',
+      }}
     >
       {!isArabic ? 'العربية' : 'En'}
     </button>
