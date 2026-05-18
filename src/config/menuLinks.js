@@ -1,4 +1,5 @@
 import messages from '../Header.messages';
+import {getConfig} from "@edx/frontend-platform";
 
 /**
  * Returns the main navigation links with labels translated via react-intl.
@@ -6,20 +7,21 @@ import messages from '../Header.messages';
  * @returns {Array<{type: string, href: string, content: string}>}
  */
 export function getCustomMenuLinks(intl) {
+  const config = getConfig();
   return [
     {
       type: 'item',
-      href: 'https://www.eduba.mohesr.gov.iq/ar',
+      href: `${config.MARKETING_SITE_BASE_URL}/ar`,
       content: intl.formatMessage(messages.home),
     },
     {
       type: 'item',
-      href: 'https://www.eduba.mohesr.gov.iq/all-courses',
+      href: `${config.MARKETING_SITE_BASE_URL}/all-courses`,
       content: intl.formatMessage(messages.programs),
     },
     {
       type: 'item',
-      href: 'https://www.eduba.mohesr.gov.iq/contact-us',
+      href: `${config.MARKETING_SITE_BASE_URL}/contact-us`,
       content: intl.formatMessage(messages.contact),
     },
   ];

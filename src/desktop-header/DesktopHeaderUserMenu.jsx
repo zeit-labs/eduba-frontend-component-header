@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import messages from '../Header.messages';
+import {getConfig} from "@edx/frontend-platform";
 
 export const logOutSvg = (
   <svg stroke="#a4a7ae" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -34,13 +35,14 @@ export const paymentSvg = (
 
 const DesktopHeaderUserMenu = () => {
   const intl = useIntl();
+  const config = getConfig();
   const newMenu = [
     {
       heading: '',
       items: [
         {
           type: 'item',
-          href: 'https://apps.eduba.mohesr.gov.iq/learner-dashboard/',
+          href: `${config.BASE_URL}/learner-dashboard/`,
           content: intl.formatMessage(messages['my-courses']),
           icon: coursesSvg,
         },
@@ -51,7 +53,7 @@ const DesktopHeaderUserMenu = () => {
       items: [
         {
           type: 'item',
-          href: 'https://eduba.mohesr.gov.iq/api/eduba/payments/v1/me',
+          href: `${config.LMS_BASE_URL}/api/eduba/payments/v1/me`,
           content: intl.formatMessage(messages['my-requests']),
           icon: paymentSvg,
         },
@@ -62,7 +64,7 @@ const DesktopHeaderUserMenu = () => {
       items: [
         {
           type: 'item',
-          href: 'https://eduba.mohesr.gov.iq/logout',
+          href: `${config.LMS_BASE_URL}/logout`,
           content: intl.formatMessage(messages.logout),
           icon: logOutSvg,
         },
