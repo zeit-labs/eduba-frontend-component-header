@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {getConfig} from "@edx/frontend-platform";
 
 const Logo = ({
   src,
@@ -7,8 +8,9 @@ const Logo = ({
   ...attributes
 }) => {
   const { href, ...restAttributes } = attributes;
+  const config = getConfig();
   return (
-    <a href="https://www.eduba.mohesr.gov.iq/ar" className="logo" {...restAttributes}>
+    <a href={`${config.MARKETING_SITE_BASE_URL}/ar`} className="logo" {...restAttributes}>
       <img className="d-block" src={src} alt={alt} />
     </a>
   );
