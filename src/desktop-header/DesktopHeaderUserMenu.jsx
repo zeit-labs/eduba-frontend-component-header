@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from '@edx/frontend-platform/i18n';
+import { getConfig } from '@edx/frontend-platform';
 import messages from '../Header.messages';
 
 export const logOutSvg = (
@@ -34,6 +35,7 @@ export const paymentSvg = (
 
 const DesktopHeaderUserMenu = () => {
   const intl = useIntl();
+  const config = getConfig();
   const newMenu = [
     {
       heading: '',
@@ -51,7 +53,7 @@ const DesktopHeaderUserMenu = () => {
       items: [
         {
           type: 'item',
-          href: '/api/eduba/payments/v1/me',
+          href: `${config.LMS_BASE_URL}/api/eduba/payments/v1/me`,
           content: intl.formatMessage(messages['my-requests']),
           icon: paymentSvg,
         },
@@ -62,7 +64,7 @@ const DesktopHeaderUserMenu = () => {
       items: [
         {
           type: 'item',
-          href: '/logout',
+          href: config.LOGOUT_URL,
           content: intl.formatMessage(messages.logout),
           icon: logOutSvg,
         },
