@@ -21,7 +21,6 @@ import { MenuIcon } from '../Icons';
 import { coursesSvg, logOutSvg, paymentSvg } from '../desktop-header/DesktopHeaderUserMenu';
 import { getCustomMenuLinks } from '../config/menuLinks';
 import LanguageSwitcherButton from '../components/LanguageSwitcherButton';
-import { getConfig } from '@edx/frontend-platform';
 
 class MobileHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
@@ -34,14 +33,13 @@ class MobileHeader extends React.Component {
 
   renderUserMenuItems() {
     const { intl } = this.props;
-    const config = getConfig();
     const customUserMenu = [
       {
         heading: '',
         items: [
           {
             type: 'item',
-            href: `${config.BASE_URL}/learner-dashboard/`,
+            href: '/learner-dashboard/',
             content: intl.formatMessage(messages['my-courses']),
             icon: coursesSvg,
           },
@@ -52,7 +50,7 @@ class MobileHeader extends React.Component {
         items: [
           {
             type: 'item',
-            href: `${config.LMS_BASE_URL}/api/eduba/payments/v1/me`,
+            href: '/api/eduba/payments/v1/me',
             content: intl.formatMessage(messages['my-requests']),
             icon: paymentSvg,
           },
@@ -63,7 +61,7 @@ class MobileHeader extends React.Component {
         items: [
           {
             type: 'item',
-            href: `${config.LMS_BASE_URL}/logout`,
+            href: '/logout',
             content: intl.formatMessage(messages.logout),
             icon: logOutSvg,
           },
