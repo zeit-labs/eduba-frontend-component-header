@@ -53,7 +53,7 @@ const DesktopHeaderUserMenu = () => {
       items: [
         {
           type: 'item',
-          href: '/api/eduba/payments/v1/me',
+          href: `${config.LMS_BASE_URL}/api/eduba/payments/v1/me`,
           content: intl.formatMessage(messages['my-requests']),
           icon: paymentSvg,
         },
