@@ -16,7 +16,7 @@ export function getCustomMenuLinks(intl) {
     },
     {
       type: 'item',
-      href: `${config.MARKETING_SITE_BASE_URL}/all-courses`,
+      href: `${config.MARKETING_SITE_BASE_URL}/courses`,
       content: intl.formatMessage(messages.programs),
     },
     {
