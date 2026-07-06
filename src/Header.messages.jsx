@@ -4,7 +4,7 @@ const messages = defineMessages({
   courses: {
     id: 'courses',
     defaultMessage: 'Courses',
-    description: 'Link to the learner course dashboard',
+    description: 'Main navigation link to the courses page on the marketing site',
   },
   programs: {
     id: 'programs',

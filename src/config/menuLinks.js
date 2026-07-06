@@ -8,20 +8,22 @@ import {getConfig} from "@edx/frontend-platform";
  */
 export function getCustomMenuLinks(intl) {
   const config = getConfig();
+  const locale = intl.locale || config.LANGUAGE_CODE || 'ar';
+  const baseUrl = (config.MARKETING_SITE_BASE_URL || '').replace(/\/+$/, '');
   return [
     {
       type: 'item',
-      href: `${config.MARKETING_SITE_BASE_URL}/ar`,
+      href: `${baseUrl}/${locale}`,
       content: intl.formatMessage(messages.home),
     },
     {
       type: 'item',
-      href: `${config.MARKETING_SITE_BASE_URL}/courses`,
-      content: intl.formatMessage(messages.programs),
+      href: `${baseUrl}/${locale}/courses`,
+      content: intl.formatMessage(messages.courses),
     },
     {
       type: 'item',
-      href: `${config.MARKETING_SITE_BASE_URL}/contact-us`,
+      href: `${baseUrl}/${locale}/contact-us`,
       content: intl.formatMessage(messages.contact),
     },
   ];
