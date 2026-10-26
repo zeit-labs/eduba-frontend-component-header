@@ -270,7 +270,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
             onClick={[Function]}
           >
             <span
-              className="avatar overflow-hidden d-inline-flex rounded-circle container-avatar"
+              className="avatar d-inline-flex rounded-circle container-avatar"
               style={
                 {
                   "height": "40px",
