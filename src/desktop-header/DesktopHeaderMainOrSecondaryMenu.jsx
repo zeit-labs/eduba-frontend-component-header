@@ -21,6 +21,14 @@ const DesktopHeaderMainOrSecondaryMenu = ({ menu }) => {
       onClick,
     } = menuItem;
 
+    if (type === 'custom') {
+      return (
+        <React.Fragment key={menuItem.key || 'custom'}>
+          {content}
+        </React.Fragment>
+      );
+    }
+
     if (type === 'item') {
       return (
         <a
