@@ -6,6 +6,11 @@ const messages = defineMessages({
     defaultMessage: 'Courses',
     description: 'Main navigation link to the courses page on the marketing site',
   },
+  explore: {
+    id: 'explore',
+    defaultMessage: 'Explore',
+    description: 'Main navigation menu linking to the category pages on the marketing site',
+  },
   programs: {
     id: 'programs',
     defaultMessage: 'Programs',
@@ -38,7 +43,7 @@ const messages = defineMessages({
   },
   'order-history': {
     id: 'order-history',
-    defaultMessage: 'Order History',
+    defaultMessage: 'My Orders',
     description: 'Link to order history',
   },
   logout: {
@@ -118,7 +123,7 @@ const messages = defineMessages({
   },
   contact: {
     id: 'contact',
-    defaultMessage: 'Contact Us',
+    defaultMessage: 'Contact',
     description: 'Main navigation link to the contact page',
   },
   'my-courses': {
