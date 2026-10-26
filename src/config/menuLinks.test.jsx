@@ -35,6 +35,12 @@ describe('getCustomMenuLinks', () => {
     expect(links[2].href).toBe('https://marketing.test/en/contact-us');
   });
 
+  it('uses the accordion variant in the mobile menu', () => {
+    const links = getCustomMenuLinks(intl, 'mobile');
+
+    expect(links[0].content.props.variant).toBe('mobile');
+  });
+
   it('falls back to relative links when the marketing URL is not configured', () => {
     getConfig.mockReturnValue({ LANGUAGE_CODE: 'ar' });
 

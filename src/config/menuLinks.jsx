@@ -12,7 +12,7 @@ import messages from '../Header.messages';
  * @param {import('@edx/frontend-platform/i18n').IntlShape} intl
  * @returns {Array<{type: string, key?: string, href?: string, content: React.ReactNode}>}
  */
-export function getCustomMenuLinks(intl) {
+export function getCustomMenuLinks(intl, variant = 'desktop') {
   const config = getConfig();
   const locale = (intl.locale || config.LANGUAGE_CODE || 'ar').split('-')[0];
   const baseUrl = (config.MARKETING_SITE_BASE_URL || '').replace(/\/+$/, '');
@@ -21,7 +21,7 @@ export function getCustomMenuLinks(intl) {
     {
       type: 'custom',
       key: 'explore',
-      content: <ExploreMenuItem />,
+      content: <ExploreMenuItem variant={variant} />,
     },
     {
       type: 'item',
