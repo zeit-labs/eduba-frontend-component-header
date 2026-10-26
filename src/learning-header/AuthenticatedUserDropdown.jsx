@@ -9,28 +9,20 @@ import { Dropdown } from '@openedx/paragon';
 
 import LearningUserMenuSlot from '../plugin-slots/LearningUserMenuSlot';
 
-import messages from './messages';
+import headerMessages from '../Header.messages';
 
 const AuthenticatedUserDropdown = ({ intl, username }) => {
   const dropdownItems = [
     {
-      message: intl.formatMessage(messages.dashboard),
+      message: intl.formatMessage(headerMessages['my-courses']),
       href: `${getConfig().LMS_BASE_URL}/dashboard`,
     },
-    {
-      message: intl.formatMessage(messages.profile),
-      href: `${getConfig().ACCOUNT_PROFILE_URL}/u/${username}`,
-    },
-    {
-      message: intl.formatMessage(messages.account),
-      href: getConfig().ACCOUNT_SETTINGS_URL,
-    },
     ...(getConfig().ORDER_HISTORY_URL ? [{
-      message: intl.formatMessage(messages.orderHistory),
+      message: intl.formatMessage(headerMessages['order-history']),
       href: getConfig().ORDER_HISTORY_URL,
     }] : []),
     {
-      message: intl.formatMessage(messages.signOut),
+      message: intl.formatMessage(headerMessages.logout),
       href: getConfig().LOGOUT_URL,
     },
   ];

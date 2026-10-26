@@ -19,7 +19,7 @@ export const AvatarIcon = (props) => (
     stroke="currentColor"
     fill="#dddddd"
     strokeWidth="0"
-    viewBox="0 0 496 512"
+    viewBox="0 8 496 496"
     height="40px"
     width="40px"
     xmlns="http://www.w3.org/2000/svg"
