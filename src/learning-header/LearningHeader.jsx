@@ -11,6 +11,8 @@ import CourseInfoSlot from '../plugin-slots/CourseInfoSlot';
 import { courseInfoDataShape } from './LearningHeaderCourseInfo';
 import messages from './messages';
 import LearningHelpSlot from '../plugin-slots/LearningHelpSlot';
+import DesktopHeaderMainOrSecondaryMenu from '../desktop-header/DesktopHeaderMainOrSecondaryMenu';
+import { getCustomMenuLinks } from '../config/menuLinks';
 
 const LearningHeader = ({
   courseOrg, courseNumber, courseTitle, intl, showUserDropdown,
@@ -32,6 +34,9 @@ const LearningHeader = ({
         {headerLogo}
         <div className="flex-grow-1 course-title-lockup d-flex" style={{ lineHeight: 1 }}>
           <CourseInfoSlot courseOrg={courseOrg} courseNumber={courseNumber} courseTitle={courseTitle} />
+        </div>
+        <div className="d-none d-lg-flex align-items-center learning-header-nav">
+          <DesktopHeaderMainOrSecondaryMenu menu={getCustomMenuLinks(intl)} />
         </div>
         {showUserDropdown && authenticatedUser && (
         <>
