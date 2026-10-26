@@ -18,7 +18,9 @@ const Avatar = ({
   return (
     <span
       style={{ height: size, width: size }}
-      className={`avatar overflow-hidden d-inline-flex rounded-circle container-avatar ${className}`}
+      className={['avatar', 'overflow-hidden', 'd-inline-flex', 'rounded-circle', 'container-avatar', className]
+        .filter(Boolean)
+        .join(' ')}
     >
       {avatar}
     </span>

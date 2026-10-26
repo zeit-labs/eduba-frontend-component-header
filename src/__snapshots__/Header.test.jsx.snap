@@ -270,7 +270,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
             onClick={[Function]}
           >
             <span
-              className="avatar overflow-hidden d-inline-flex rounded-circle container-avatar null"
+              className="avatar overflow-hidden d-inline-flex rounded-circle container-avatar"
               style={
                 {
                   "height": "40px",
@@ -292,7 +292,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
                     "width": "40px",
                   }
                 }
-                viewBox="0 0 496 512"
+                viewBox="0 8 496 496"
                 width="40px"
                 xmlns="http://www.w3.org/2000/svg"
               >
