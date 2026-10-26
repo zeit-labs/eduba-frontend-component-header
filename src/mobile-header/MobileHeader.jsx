@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getConfig } from '@edx/frontend-platform';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 
 // Local Components
@@ -21,7 +22,6 @@ import { MenuIcon } from '../Icons';
 import { coursesSvg, logOutSvg, paymentSvg } from '../desktop-header/DesktopHeaderUserMenu';
 import { getCustomMenuLinks } from '../config/menuLinks';
 import LanguageSwitcherButton from '../components/LanguageSwitcherButton';
-import { getConfig } from '@edx/frontend-platform';
 
 class MobileHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
