@@ -53,17 +53,7 @@ const HeaderContent = ({ mainMenuItems, secondaryMenuItems, userMenuItems }) => 
       {
         type: 'item',
         href: `${config.LMS_BASE_URL}/dashboard`,
-        content: intl.formatMessage(headerMessages.dashboard),
-      },
-      {
-        type: 'item',
-        href: `${config.ACCOUNT_PROFILE_URL}/u/${authenticatedUser.username}`,
-        content: intl.formatMessage(headerMessages.profile),
-      },
-      {
-        type: 'item',
-        href: config.ACCOUNT_SETTINGS_URL,
-        content: intl.formatMessage(headerMessages['account-settings']),
+        content: intl.formatMessage(headerMessages['my-courses']),
       },
       ...(config.ORDER_HISTORY_URL ? [{
         type: 'item',
@@ -87,11 +77,6 @@ const HeaderContent = ({ mainMenuItems, secondaryMenuItems, userMenuItems }) => 
       type: 'item',
       href: config.LOGIN_URL,
       content: intl.formatMessage(headerMessages.login),
-    },
-    {
-      type: 'item',
-      href: `${config.LMS_BASE_URL}/register`,
-      content: intl.formatMessage(headerMessages['sign-up']),
     },
   ];
 

@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {getConfig} from "@edx/frontend-platform";
+import { getConfig } from '@edx/frontend-platform';
 
+import { getLanguageFromCookie } from './hooks/useLanguageSwitcher';
+
+/**
+ * The site logo, linking to the marketing home in the learner's language (as the marketing header
+ * does). The logo is the home link, so the header no longer renders a separate Home item.
+ */
 const Logo = ({
   src,
   alt,
@@ -9,8 +15,11 @@ const Logo = ({
 }) => {
   const { href, ...restAttributes } = attributes;
   const config = getConfig();
+  const locale = (getLanguageFromCookie() || config.LANGUAGE_CODE || 'ar').split('-')[0];
+  const marketingBase = (config.MARKETING_SITE_BASE_URL || '').replace(/\/+$/, '');
+
   return (
-    <a href={`${config.MARKETING_SITE_BASE_URL}/ar`} className="logo" {...restAttributes}>
+    <a href={`${marketingBase}/${locale}`} className="logo" {...restAttributes}>
       <img className="d-block" src={src} alt={alt} />
     </a>
   );

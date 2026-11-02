@@ -105,3 +105,10 @@ $rounded-pill: 50rem  !default;
     border-radius: var(--pgn-size-rounded-pill, $rounded-pill);
   }
 }
+
+// The header is a block-level element. The .custom-container utility shipped with the apps makes
+// it inline-block, which creates a line-box gap (~21px) before the next element — visible above the
+// learning MFE's instructor toolbar and the dashboard's "view as" bar.
+.site-header-desktop.custom-container {
+  display: block;
+}
